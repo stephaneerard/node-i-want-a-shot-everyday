@@ -47,42 +47,25 @@ export async function takeAshot(request: RequestInterface): Promise<number> {
 
     console.log('Running schedule %s', scheduling);
 
-    await api.takeAshot({
-        query: request.query,
-        basePath: request.basePath,
-        userAgent: request.userAgent,
-        resolutions: request.resolutions,
-        pages: request.pages,
-        lite: request.lite,
-        lilo: request.lilo,
-        egp: request.egp,
-        edu: request.edu,
-        ecosia: request.ecosia,
-        bing: request.bing,
-        api: request.api,
-        list: request.list
+    schedule.scheduleJob(scheduling, async function (fireDate: Date) {
+        console.log('Running (fireDate: %s, runningDate: %s)', fireDate.toISOString(), (new Date().toISOString()));
+
+        await api.takeAshot({
+            query: request.query,
+            basePath: request.basePath,
+            userAgent: request.userAgent,
+            resolutions: request.resolutions,
+            pages: request.pages,
+            lite: request.lite,
+            lilo: request.lilo,
+            egp: request.egp,
+            edu: request.edu,
+            ecosia: request.ecosia,
+            bing: request.bing,
+            api: request.api,
+            list: request.list
+        });
     });
-    //
-    //
-    // const scheduled = schedule.scheduleJob(scheduling, async function (fireDate: Date) {
-    //     console.log('Running (fireDate: %s, runningDate: %s)', fireDate.toISOString(), (new Date().toISOString()));
-    //
-    //     await api.takeAshot({
-    //         query: request.query,
-    //         basePath: request.basePath,
-    //         userAgent: request.userAgent,
-    //         resolutions: request.resolutions,
-    //         pages: request.pages,
-    //         lite: request.lite,
-    //         lilo: request.lilo,
-    //         egp: request.egp,
-    //         edu: request.edu,
-    //         ecosia: request.ecosia,
-    //         bing: request.bing,
-    //         api: request.api,
-    //         list: request.list
-    //     });
-    // });
 
     return await waitKill(console, process);
 }
