@@ -1,7 +1,6 @@
 {
   "author": "Stephane Erard <serard06@protonmail.com",
   "dependencies": {
-    "i-want-a-shot-list": "^0.0.3",
     "node-schedule": "^1.3.2",
     "yargs": "^15.1.0"
   },
